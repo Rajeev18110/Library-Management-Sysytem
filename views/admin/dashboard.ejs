@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, <%= user.username %>!</p>
+
+    <a href="/books/new" class="btn btn-primary mb-3">Add New Book</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% books.forEach(book => { %>
+                <tr>
+                    <td>
+                        <% if(book.coverImage){ %>
+                            <img src="<%= book.coverImage %>" width="80" class="img-thumbnail">
+                        <% } else { %>N/A<% } %>
+                    </td>
+                    <td><%= book.title %></td>
+                    <td><%= book.author %></td>
+                    <td>
+                        <a href="/books/edit/<%= book._id %>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/books/delete/<%= book._id %>" class="btn btn-danger btn-sm">Delete</a>
+                        <% if(book.coverImage){ %>
+                            <a href="/books/download/<%= book._id %>" class="btn btn-info btn-sm">Download Cover</a>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer') %>
